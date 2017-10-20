@@ -18,10 +18,15 @@ public class PhoneGUI {
     }
     
     private static ItemSmith smith = new ItemSmith(plugin);
-    private static Inventory phone = Bukkit.createInventory(null, 54, (ChatColor.BLUE + "" + ChatColor.BOLD + owner.getName() + "'s Phone"));
+    private static Inventory phone = Bukkit.createInventory(null, 54, (ChatColor.BLUE + "" + ChatColor.BOLD + "Phone"));
     
     static {
-        
+        // Column One
+        phone.setItem(0, smith.Messages());
+        phone.setItem(9, smith.Calls());
+        phone.setItem(18, smith.Home());
+        phone.setItem(27, smith.People());
+        phone.setItem(36, smith.Browser());
     }
     
     public void show(Player p) {

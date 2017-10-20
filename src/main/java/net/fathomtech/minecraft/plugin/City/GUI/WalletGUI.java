@@ -17,11 +17,15 @@ public class WalletGUI {
     }
     
     private static ItemSmith smith = new ItemSmith(plugin);
-    private static Inventory gui = Bukkit.createInventory(owner, 3, (ChatColor.GREEN + "" + ChatColor.BOLD + "Wallet"));
+    private static Inventory wallet = Bukkit.createInventory(owner, 3, (ChatColor.GREEN + "" + ChatColor.BOLD + "Wallet"));
     
     static {
-        gui.setItem(0, smith.Cash());
-        gui.setItem(1, smith.Cards());
-        gui.setItem(2, smith.Receipts());
+        wallet.setItem(0, smith.Cash());
+        wallet.setItem(1, smith.Cards());
+        wallet.setItem(2, smith.Receipts());
+    }
+    
+    public void show(Player p) {
+        p.openInventory(wallet);
     }
 }
