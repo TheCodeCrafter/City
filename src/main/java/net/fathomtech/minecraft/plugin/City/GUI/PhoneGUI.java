@@ -7,6 +7,7 @@ import org.bukkit.inventory.Inventory;
 
 import net.fathomtech.minecraft.plugin.City.ItemSmith;
 import net.fathomtech.minecraft.plugin.City.Main;
+import net.fathomtech.minecraft.plugin.City.GUI.Apps.App;
 
 public class PhoneGUI {
     
@@ -18,19 +19,23 @@ public class PhoneGUI {
     }
     
     private static ItemSmith smith = new ItemSmith(plugin);
-    private static Inventory phone = Bukkit.createInventory(null, 54, (ChatColor.BLUE + "" + ChatColor.BOLD + "Phone"));
+    public static Inventory home = Bukkit.createInventory(null, 54, (ChatColor.BLUE + "" + ChatColor.BOLD + "Phone"));
     
     static {
         // Hotbar
-        phone.setItem(0, smith.Messages());
-        phone.setItem(9, smith.Calls());
-        phone.setItem(18, smith.Home());
-        phone.setItem(27, smith.People());
-        phone.setItem(36, smith.Browser());
+        home.setItem(0, smith.Messages());
+        home.setItem(9, smith.Calls());
+        home.setItem(18, smith.Home());
+        home.setItem(27, smith.People());
+        home.setItem(36, smith.Browser());
         
     }
     
-    public void show(Player p) {
-        p.openInventory(phone);
+    public void homepage(Player p) {
+        p.openInventory(home);
+    }
+    
+    public void openApp(Player player, App app) {
+        app.open(player);
     }
 }

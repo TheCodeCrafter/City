@@ -17,7 +17,7 @@ public class WalletGUI {
     }
     
     private static ItemSmith smith = new ItemSmith(plugin);
-    private static Inventory wallet = Bukkit.createInventory(owner, 3, (ChatColor.GREEN + "" + ChatColor.BOLD + "Wallet"));
+    public static Inventory wallet = Bukkit.createInventory(owner, 3, (ChatColor.GREEN + "" + ChatColor.BOLD + "Wallet"));
     
     static {
         wallet.setItem(0, smith.Cash());

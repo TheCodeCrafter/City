@@ -12,6 +12,10 @@ public class ItemSmith {
     
     Main plugin;
     
+    public ItemSmith() {
+        
+    }
+    
     public ItemSmith(Main p) {
         plugin = p;
     }
@@ -214,6 +218,20 @@ public class ItemSmith {
         browser.setItemMeta(meta);
         
         return browser;
+    }
+    
+    public static class Messages {
+        public static ItemStack NewMessage() {
+            return null;
+        }
+        
+        public static ItemStack Conversations() {
+            return null;
+        }
+        
+        public static ItemStack Settings() {
+            return null;
+        }
     }
     
 }
