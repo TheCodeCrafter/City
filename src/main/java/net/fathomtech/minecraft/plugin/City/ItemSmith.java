@@ -205,8 +205,11 @@ public class ItemSmith {
         
         meta.setDisplayName(ChatColor.WHITE + "Browser");
         
+        meta.setUnbreakable(true);
+        
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
         
         browser.setItemMeta(meta);
         
