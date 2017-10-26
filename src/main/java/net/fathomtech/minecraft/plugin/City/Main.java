@@ -11,6 +11,7 @@ import net.fathomtech.minecraft.plugin.City.Admin.CityCommand;
 import net.fathomtech.minecraft.plugin.City.Commands.PhoneCommand;
 import net.fathomtech.minecraft.plugin.City.GUI.PhoneGUI;
 
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -97,5 +98,13 @@ public class Main extends JavaPlugin {
         ResultSet result = statement.executeQuery("");
         
         return false;
+    }
+    
+    public void registerAddress(String name, Location location) throws SQLException, ClassNotFoundException {
+        String x = location.getX() + "";
+        String y = location.getY() + "";
+        String z = location.getZ() + "";
+        
+        statement.executeUpdate("INSERT INTO FathomAddressData VALUES ('" + name + "', '" + x + y + z + "');");
     }
 }

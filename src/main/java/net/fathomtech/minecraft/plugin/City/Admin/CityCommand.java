@@ -1,11 +1,14 @@
 package net.fathomtech.minecraft.plugin.City.Admin;
 
+import java.sql.SQLException;
+
 import net.fathomtech.minecraft.plugin.City.Main;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class CityCommand implements CommandExecutor {
     
@@ -38,6 +41,44 @@ public class CityCommand implements CommandExecutor {
                 sender.sendMessage(ChatColor.WHITE + "/city npc <info/tp> <id/name>");
                 return true;
             }
+            if(args.length >= 1) {
+                switch(args[0].toLowerCase()) {
+                    case "address":
+                        if(args.length == 1) {
+                            sender.sendMessage(ChatColor.DARK_PURPLE + "Usage: " + ChatColor.WHITE + "/city address <name> <location>");
+                            sender.sendMessage(ChatColor.GREEN + "Use this to register an address within our database. If you don't specify a location then it will use your current location.");
+                            return true;
+                        }
+                        
+                        if(args.length == 2) {
+                            if(sender instanceof Player) {
+                                Player player = (Player) sender;
+                                try {
+                                    plugin.registerAddress(args[0], player.getLocation());
+                                } catch(SQLException exception) {
+                                    player.sendMessage(ChatColor.RED + "There was a problem with the database! Check the logs for errors!");
+                                    plugin.getLogger().warning(exception.getMessage());
+                                    return false;
+                                } catch(ClassNotFoundException exception) {
+                                    player.sendMessage(ChatColor.RED + "There was an error attempting to call the database! Check the logs for errors!");
+                                    plugin.getLogger().warning(exception.getMessage());
+                                    return false;
+                                } catch (Exception exception) {
+                                    player.sendMessage(ChatColor.RED + "Plugin Error!!! Report this or check the logs!");
+                                    plugin.getLogger().warning(exception.getMessage());
+                                    return false;
+                                }
+                                player.sendMessage(ChatColor.GREEN + "Address successfully registered in the database!");
+                                return true;
+                            }
+                            sender.sendMessage(ChatColor.RED + "You must specify a location if you aren't a player!");
+                            return false;
+                        }
+                        sender.sendMessage(ChatColor.RED + "Unrecognized Arguments!");
+                        return false;
+                }
+            }
+            sender.sendMessage(ChatColor.RED + "Unrecognized Arguments!");
             return false;
         }
         sender.sendMessage(ChatColor.RED + "Unrecognized Command!");
